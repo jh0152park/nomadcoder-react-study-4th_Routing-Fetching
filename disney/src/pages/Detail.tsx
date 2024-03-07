@@ -19,8 +19,6 @@ export default function Detail() {
         getCharacterDetail
     );
 
-    console.log(characterDetail);
-
     return (
         <>
             <Helmet>
