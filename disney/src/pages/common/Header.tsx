@@ -3,7 +3,15 @@ import { Night, Star } from "../../styles/common/star";
 
 export default function Header() {
     return (
-        <Center w="100%" h="200px" alignItems="flex-end">
+        <Center
+            w="100%"
+            h="200px"
+            alignItems="flex-end"
+            position="fixed"
+            bgColor="#121212"
+            zIndex="99"
+            pb="20px"
+        >
             <Image
                 src="/resources/images/disney_logo.png"
                 w="150px"

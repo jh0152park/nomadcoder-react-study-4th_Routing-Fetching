@@ -3,26 +3,17 @@ import { ICharacters, getCharacters } from "../api";
 import { useQuery } from "react-query";
 import { Center, Grid } from "@chakra-ui/react";
 import CardSkeleton from "../components/home/CardSkeleton";
+import Card from "../components/card/Card";
 
 export default function Home() {
-    // index 9
     const characters = useQuery<ICharacters[]>(["characters"], getCharacters);
-
-    if (characters.data) {
-        console.log(characters.data);
-        characters.data.forEach((char, i) =>
-            char.name.toLowerCase().includes("mouse")
-                ? console.log(char.name, char.imageUrl, i)
-                : null
-        );
-    }
 
     return (
         <>
             <Helmet>
                 <title>Disney Characters</title>
             </Helmet>
-            <Center w="100%" px="50px" mt="50px">
+            <Center>
                 <Grid
                     templateColumns={{
                         base: "repeat(1, 1fr)",
@@ -31,9 +22,22 @@ export default function Home() {
                     }}
                     gap={10}
                 >
-                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((i) => (
-                        <CardSkeleton w="440" h="620" />
-                    ))}
+                    {characters.isLoading
+                        ? [1, 2, 3, 4, 5, 6].map((i) => (
+                              <CardSkeleton key={i} w="350" h="495" />
+                          ))
+                        : characters.data
+                        ? characters.data
+                              .slice(900, 1000)
+                              .map((char) => (
+                                  <Card
+                                      key={char.id}
+                                      w="350"
+                                      h="495"
+                                      image={char.imageUrl}
+                                  />
+                              ))
+                        : null}
                 </Grid>
             </Center>
         </>
