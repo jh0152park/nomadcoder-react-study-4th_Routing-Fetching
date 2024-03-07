@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     background-color: #121212;
     color: whitesmoke;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: "Tangerine";
   }
 
   * {
