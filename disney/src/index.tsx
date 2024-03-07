@@ -1,6 +1,7 @@
 import App from "./App";
 import ReactDOM from "react-dom/client";
 import { reset } from "styled-reset";
+import { ChakraProvider } from "@chakra-ui/react";
 import { createGlobalStyle } from "styled-components";
 import { QueryClient, QueryClientProvider } from "react-query";
 
@@ -27,7 +28,9 @@ root.render(
     <>
         <GlobalStyle />
         <QueryClientProvider client={queryClient}>
-            <App />
+            <ChakraProvider>
+                <App />
+            </ChakraProvider>
         </QueryClientProvider>
     </>
 );
