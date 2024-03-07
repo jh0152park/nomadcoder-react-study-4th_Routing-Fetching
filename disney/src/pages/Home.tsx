@@ -8,10 +8,6 @@ import Card from "../components/card/Card";
 export default function Home() {
     const characters = useQuery<ICharacters[]>(["characters"], getCharacters);
 
-    if (characters.data) {
-        console.log(characters.data.slice(900, 910));
-    }
-
     return (
         <>
             <Helmet>
