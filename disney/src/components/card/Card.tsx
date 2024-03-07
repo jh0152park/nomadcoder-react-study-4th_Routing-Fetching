@@ -1,6 +1,9 @@
 import { Box, Center, Image, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { IMAGE_URL } from "../../data";
+import { useNavigate } from "react-router-dom";
+import { CharacterImage, CharacterName } from "../../global";
+import { useSetRecoilState } from "recoil";
 
 interface ICardProps {
     id: number;
@@ -11,15 +14,23 @@ interface ICardProps {
 }
 
 export default function Card({ id, name, image, w, h }: ICardProps) {
+    const navigate = useNavigate();
+
     const [speed, setSpeed] = useState(0.1);
+    const [glitter, setGlitter] = useState(0);
+
     const [yDeg, setYDeg] = useState(0);
     const [xDeg, setXDeg] = useState(0);
     const [brightnessPosition, setBrightnessPosition] = useState(100);
     const Image404 = "/resources/images/404Image.png";
 
+    const setCharacterName = useSetRecoilState(CharacterName);
+    const setCharacterImage = useSetRecoilState(CharacterImage);
+
     function onMouseLeave() {
         setYDeg(0);
         setXDeg(0);
+        setGlitter(0);
         setSpeed(0.5);
     }
 
@@ -28,9 +39,16 @@ export default function Card({ id, name, image, w, h }: ICardProps) {
         const y = e.nativeEvent.offsetY;
 
         setSpeed(0.1);
+        setGlitter(0.7);
         setXDeg(-(30 / (+h * 0.5)) * y + 30);
         setYDeg((20 / (+w * 0.5)) * x - 20);
         setBrightnessPosition(x / 7 + y / 7);
+    }
+
+    function onCardClick() {
+        setCharacterName(name);
+        setCharacterImage(IMAGE_URL[name] || image || Image404);
+        navigate(`/${id}`);
     }
 
     return (
@@ -43,14 +61,14 @@ export default function Card({ id, name, image, w, h }: ICardProps) {
             transform={[
                 `rotateY(${yDeg}deg) rotateX(${xDeg}deg) perspective(350px)`,
             ]}
-            _hover={{ cursor: "pointer" }}
+            _hover={{
+                cursor: "pointer",
+            }}
             position="relative"
             border="10px solid #DDE6ED"
             borderRadius="10px"
-            onClick={() => {
-                console.log(`${id} / ${name}`);
-                console.log(IMAGE_URL[name]);
-            }}
+            onClick={onCardClick}
+            id="card"
         >
             <Box
                 w="100%"
@@ -59,7 +77,7 @@ export default function Card({ id, name, image, w, h }: ICardProps) {
                 backgroundSize="150% 150%"
                 backgroundPosition={`${brightnessPosition}%`}
                 position="absolute"
-                filter="brightness(1.2) opacity(0.8)"
+                filter={`brightness(1.2) opacity(${glitter})`}
                 mixBlendMode="color-dodge"
             />
 

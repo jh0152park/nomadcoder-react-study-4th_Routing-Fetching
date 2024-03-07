@@ -4,6 +4,7 @@ import { reset } from "styled-reset";
 import { ChakraProvider } from "@chakra-ui/react";
 import { createGlobalStyle } from "styled-components";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { RecoilRoot } from "recoil";
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -29,7 +30,9 @@ root.render(
         <GlobalStyle />
         <QueryClientProvider client={queryClient}>
             <ChakraProvider>
-                <App />
+                <RecoilRoot>
+                    <App />
+                </RecoilRoot>
             </ChakraProvider>
         </QueryClientProvider>
     </>
