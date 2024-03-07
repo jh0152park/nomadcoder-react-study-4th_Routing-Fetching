@@ -48,7 +48,7 @@ export default function Card({ id, name, image, w, h }: ICardProps) {
     function onCardClick() {
         setCharacterName(name);
         setCharacterImage(IMAGE_URL[name] || image || Image404);
-        navigate(`/${id}`);
+        navigate(`/character/${id}`);
     }
 
     return (
@@ -68,7 +68,6 @@ export default function Card({ id, name, image, w, h }: ICardProps) {
             border="10px solid #DDE6ED"
             borderRadius="10px"
             onClick={onCardClick}
-            id="card"
         >
             <Box
                 w="100%"
