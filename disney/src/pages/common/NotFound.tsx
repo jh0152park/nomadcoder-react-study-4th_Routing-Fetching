@@ -1,6 +1,5 @@
 import Lottie from "lottie-react";
 import { Helmet } from "react-helmet";
-import { ContainerCenter } from "../../styles/common/Styles";
 import Hamster from "../../resource/json/Hamster.json";
 import { Heading, VStack } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
