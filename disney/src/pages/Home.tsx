@@ -1,7 +1,8 @@
-import { Text, VStack } from "@chakra-ui/react";
 import { Helmet } from "react-helmet";
 import { ICharacters, getCharacters } from "../api";
 import { useQuery } from "react-query";
+import { Center, Grid } from "@chakra-ui/react";
+import CardSkeleton from "../components/home/CardSkeleton";
 
 export default function Home() {
     // index 9
@@ -21,11 +22,20 @@ export default function Home() {
             <Helmet>
                 <title>Disney Characters</title>
             </Helmet>
-            <VStack w="100%" mt="40px">
-                <Text fontWeight="bold" fontSize="40px">
-                    Disney Characters
-                </Text>
-            </VStack>
+            <Center w="100%" px="50px" mt="50px">
+                <Grid
+                    templateColumns={{
+                        base: "repeat(1, 1fr)",
+                        md: "repeat(2, 1fr)",
+                        lg: "repeat(3, 1fr)",
+                    }}
+                    gap={10}
+                >
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((i) => (
+                        <CardSkeleton w="440" h="620" />
+                    ))}
+                </Grid>
+            </Center>
         </>
     );
 }
