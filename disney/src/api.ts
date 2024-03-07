@@ -22,6 +22,7 @@ export async function getCharacters() {
 }
 
 export async function getCharacterDetail({ queryKey }: QueryFunctionContext) {
+    // eslint-disable-next-line
     const [_, id] = queryKey;
 
     return (
