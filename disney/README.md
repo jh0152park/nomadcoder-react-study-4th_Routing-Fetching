@@ -4,7 +4,7 @@ nomadcoder-react-study-4th_Routing + Fetching
 
 # Result URL
 
--   https://1e53f7e2.nomadcoder-react-study-4th-routing-fetching.pages.dev/
+-   https://nomadcoder-react-study-4th-routing-fetching.pages.dev/
 
 # Requirements
 
