@@ -3,11 +3,11 @@ import { useState } from "react";
 
 interface ICardProps {
     image: string;
-    width: number;
-    height: number;
+    w: number | string;
+    h: number | string;
 }
 
-export default function Card({ image, width, height }: ICardProps) {
+export default function Card({ image, w, h }: ICardProps) {
     const [yDeg, setYDeg] = useState(0);
     const [xDeg, setXDeg] = useState(0);
     const [brightnessPosition, setBrightnessPosition] = useState(100);
@@ -21,15 +21,15 @@ export default function Card({ image, width, height }: ICardProps) {
         const x = e.nativeEvent.offsetX;
         const y = e.nativeEvent.offsetY;
 
-        setXDeg(-(30 / (height * 0.5)) * y + 30);
-        setYDeg((20 / (width * 0.5)) * x - 20);
+        setXDeg(-(30 / (+h * 0.5)) * y + 30);
+        setYDeg((20 / (+w * 0.5)) * x - 20);
         setBrightnessPosition(x / 7 + y / 7);
     }
 
     return (
         <Box
-            w={`${width}px`}
-            h={`${height}px`}
+            w={`${w}px`}
+            h={`${h}px`}
             onMouseMove={onMouseMove}
             onMouseLeave={onMouseLeave}
             transition="all 0.1s linear"
