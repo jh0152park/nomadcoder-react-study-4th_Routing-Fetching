@@ -5,7 +5,7 @@ import { useRecoilValue } from "recoil";
 import { Helmet } from "react-helmet";
 import Card from "../components/card/Card";
 import { useQuery } from "react-query";
-import { ICharacter, getCharacterDetail } from "../api";
+import { ICharacterDetail, getCharacterDetail } from "../api";
 import MySpinner from "../components/detail/MySpinner";
 import { IoArrowBack } from "react-icons/io5";
 
@@ -14,10 +14,12 @@ export default function Detail() {
     const navigate = useNavigate();
     const characterName = useRecoilValue(CharacterName);
     const characterImage = useRecoilValue(CharacterImage);
-    const characterDetail = useQuery<ICharacter>(
+    const characterDetail = useQuery<ICharacterDetail>(
         ["character", id],
         getCharacterDetail
     );
+
+    console.log(characterDetail);
 
     return (
         <>
@@ -58,7 +60,7 @@ export default function Detail() {
                             <Text fontSize="35px" fontWeight="bold" mb="20px">
                                 {characterName}'s films
                             </Text>
-                            {characterDetail.data?.films.map((film) => (
+                            {characterDetail.data?.data.films.map((film) => (
                                 <Text
                                     fontSize="25px"
                                     fontWeight="bold"
