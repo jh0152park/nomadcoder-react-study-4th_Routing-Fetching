@@ -1,13 +1,16 @@
-import { Box, Image } from "@chakra-ui/react";
+import { Box, Center, Image, Text } from "@chakra-ui/react";
 import { useState } from "react";
+import { IMAGE_URL } from "../../data";
 
 interface ICardProps {
+    id: number;
+    name: string;
     image: string;
     w: number | string;
     h: number | string;
 }
 
-export default function Card({ image, w, h }: ICardProps) {
+export default function Card({ id, name, image, w, h }: ICardProps) {
     const [speed, setSpeed] = useState(0.1);
     const [yDeg, setYDeg] = useState(0);
     const [xDeg, setXDeg] = useState(0);
@@ -45,7 +48,8 @@ export default function Card({ image, w, h }: ICardProps) {
             border="10px solid #DDE6ED"
             borderRadius="10px"
             onClick={() => {
-                console.log(`image url: ${image}`);
+                console.log(`${id} / ${name}`);
+                console.log(IMAGE_URL[name]);
             }}
         >
             <Box
@@ -58,11 +62,24 @@ export default function Card({ image, w, h }: ICardProps) {
                 filter="brightness(1.2) opacity(0.8)"
                 mixBlendMode="color-dodge"
             />
+
+            <Center
+                w="100%"
+                h="10%"
+                bottom={0}
+                bg="linear-gradient(75deg, transparent -30%, rgba(255, 219, 112, 1))"
+                position="absolute"
+            >
+                <Text fontWeight="bold" fontSize="40px" color="black">
+                    {name}
+                </Text>
+            </Center>
+
             <Image
                 w="100%"
                 h="100%"
                 objectFit="cover"
-                src={image || Image404}
+                src={IMAGE_URL[name] || image || Image404}
             />
         </Box>
     );

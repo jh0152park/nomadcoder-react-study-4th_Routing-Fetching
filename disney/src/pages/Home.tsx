@@ -28,12 +28,14 @@ export default function Home() {
                           ))
                         : characters.data
                         ? characters.data
-                              .slice(900, 1000)
+                              .slice(800, 902)
                               .map((char) => (
                                   <Card
-                                      key={char.id}
                                       w="350"
                                       h="495"
+                                      id={char.id}
+                                      key={char.id}
+                                      name={char.name}
                                       image={char.imageUrl}
                                   />
                               ))
