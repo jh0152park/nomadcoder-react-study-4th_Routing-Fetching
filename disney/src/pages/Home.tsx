@@ -1,12 +1,16 @@
 import { Helmet } from "react-helmet";
-import { ICharacters, getCharacters } from "../api";
+import { ICharacter, ICharacters, getCharacters } from "../api";
 import { useQuery } from "react-query";
 import { Center, Grid } from "@chakra-ui/react";
 import CardSkeleton from "../components/home/CardSkeleton";
 import Card from "../components/card/Card";
+import { useState } from "react";
 
 export default function Home() {
-    const characters = useQuery<ICharacters[]>(["characters"], getCharacters);
+    const characters = useQuery<ICharacters>(["characters"], getCharacters);
+    const charactersWithFilm = characters.data?.data.filter(
+        (char) => char.films.length > 5
+    );
 
     return (
         <>
@@ -26,19 +30,17 @@ export default function Home() {
                         ? [1, 2, 3, 4, 5, 6].map((i) => (
                               <CardSkeleton key={i} w="350" h="495" />
                           ))
-                        : characters.data
-                        ? characters.data
-                              .slice(800, 902)
-                              .map((char) => (
-                                  <Card
-                                      w="350"
-                                      h="495"
-                                      id={char.id}
-                                      key={char.id}
-                                      name={char.name}
-                                      image={char.imageUrl}
-                                  />
-                              ))
+                        : charactersWithFilm
+                        ? charactersWithFilm.map((char) => (
+                              <Card
+                                  w="350"
+                                  h="495"
+                                  id={char._id}
+                                  key={char._id}
+                                  name={char.name}
+                                  image={char.imageUrl}
+                              />
+                          ))
                         : null}
                 </Grid>
             </Center>

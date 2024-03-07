@@ -2,22 +2,24 @@ import axios from "axios";
 import { QueryFunctionContext } from "react-query";
 
 export interface ICharacters {
-    id: number;
-    name: string;
-    imageUrl: string;
+    data: ICharacter[];
 }
 
 export interface ICharacter {
-    films: string[];
-    id: number;
-    imageUrl: string;
+    _id: number;
     name: string;
+    films: string[];
+    imageUrl: string;
     sourceUrl: string;
+}
+
+export interface ICharacterDetail {
+    data: ICharacter;
 }
 
 export async function getCharacters() {
     return (
-        await axios.get("https://disney_api.nomadcoders.workers.dev/characters")
+        await axios.get("https://api.disneyapi.dev/character?pageSize=4000")
     ).data;
 }
 
@@ -25,9 +27,5 @@ export async function getCharacterDetail({ queryKey }: QueryFunctionContext) {
     // eslint-disable-next-line
     const [_, id] = queryKey;
 
-    return (
-        await axios.get(
-            ` https://disney_api.nomadcoders.workers.dev/characters/${id}`
-        )
-    ).data;
+    return (await axios.get(`https://api.disneyapi.dev/character/${id}`)).data;
 }
