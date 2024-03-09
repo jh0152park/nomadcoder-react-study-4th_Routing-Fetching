@@ -2,10 +2,6 @@
 
 nomadcoder-react-study-4th_Routing + Fetching
 
-# Result URL
-
--   https://nomadcoder-react-study-4th-routing-fetching.pages.dev/
-
 # Requirements
 
 -   Home Page (/): Display a list of all the Disney characters.
